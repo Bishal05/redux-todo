@@ -17,9 +17,9 @@ function Todo(props) {
             <button onClick={()=>{props.addTask(task); setTask("")}}>Add</button>
             <ul>
                 
-                {props.taskList.map((task,idx)=>{
+                {props.taskList.map((taskObj)=>{
                     return(
-                        <li style={{listStyle:"none"}} key={idx} onClick={(idx)=>{props.deleteTask(idx)}}>{task}</li>
+                        <li style={{listStyle:"none"}} key={taskObj.id} onClick={()=>{props.deleteTask(taskObj.id)}}>{taskObj.task}</li>
                     )
                 })}
             </ul>
@@ -38,6 +38,12 @@ const mapDispatchToProps=(dispatch)=>{
                 type:"add_task",
                 payload:task
             })
+        },
+        deleteTask:(id)=>{
+            dispatch({
+                type:"delete_task",
+                payload:id
+            }) 
         }
     }
 
